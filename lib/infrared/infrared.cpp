@@ -285,10 +285,137 @@ void AC_warm()
     IrSend_cmd();
     // printf("---sending complete!-----\n");
     delay(3000);
+}
+
+void AC_wind()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_wind) / sizeof(group_wind[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_wind, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
 
 }
 
+void AC_dehumid()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_dehumid) / sizeof(group_dehumid[0]);
+ 
+    uint8_t* cmdBuf = buf;
 
+    byte len = WriteToStorageCmd(group_dehumid, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_temp_up()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_temp_up) / sizeof(group_temp_up[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_temp_up, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_temp_down()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_temp_down) / sizeof(group_temp_down[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_temp_down, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_auxheat()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_auxheat) / sizeof(group_auxheat[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_auxheat, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
 
 void AC_updown_on()
 {
@@ -313,6 +440,189 @@ void AC_updown_on()
     IrSend_cmd();
     // printf("---sending complete!-----\n");
     delay(3000);
+
+}
+
+void AC_updown_off()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_updown_off) / sizeof(group_updown_off[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_updown_off, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_leftright_on()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_leftright_on) / sizeof(group_leftright_on[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_leftright_on, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_leftright_off()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_leftright_off) / sizeof(group_leftright_off[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_leftright_off, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_velocity()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_velocity) / sizeof(group_velocity[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_velocity, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_mute_on()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_mute_on) / sizeof(group_mute_on[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_mute_on, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_mute_off()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_mute_off) / sizeof(group_mute_off[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_mute_off, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
+}
+
+void AC_light()
+{
+    uint8_t buf[512];
+    int dataLen = sizeof(group_light) / sizeof(group_light[0]);
+ 
+    uint8_t* cmdBuf = buf;
+
+    byte len = WriteToStorageCmd(group_light, dataLen, 0x00, &cmdBuf);
+    Ir_Serial.write(cmdBuf,len);
+    if (len > 0) 
+    {
+        for (int i = 0; i < dataLen+8; ++i)
+        {
+            printf(" %02X ", cmdBuf[i]); // 使用%02X以十六进制格式打印每个字节
+        }
+        printf("Command length: %d\n", dataLen);
+        free(cmdBuf); // 释放动态分配的内存
+    }
+    delay(500);
+
+    IrSend_cmd();
+    // printf("---sending complete!-----\n");
+    delay(3000);
+
 }
 
 

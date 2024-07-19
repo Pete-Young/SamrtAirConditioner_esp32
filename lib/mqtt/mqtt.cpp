@@ -330,56 +330,61 @@ void executeAirConditionerControlCommand(const JsonObject &paras)
     }
     else if (strcmp(ctr, "AirSupply") == 0)
     {
-        AC_cool();
+        AC_wind();
         Serial.println("空调已设置为送风模式");
     }
     else if (strcmp(ctr, "Dehumidification") == 0)
     {
-        AC_cool();
+        AC_dehumid();
         Serial.println("空调已设置为除湿模式");
     }else if (strcmp(ctr, "Temperature+") == 0)
     {
-        AC_cool();
+        AC_temp_up();
         Serial.println("升高温度");
     }
     else if (strcmp(ctr, "Temperature-") == 0)
     {
-        AC_cool();
+        AC_temp_down();
         Serial.println("降低温度");
     }
     else if (strcmp(ctr, "AuxiliaryHeating") == 0)
     {
-        AC_cool();
+        AC_auxheat();
         Serial.println("辅热模式");
     }
     else if (strcmp(ctr, "UpAndDown") == 0)
     {
-        AC_cool();
+        AC_updown_on();
         Serial.println("上下扫风模式");
     }
     else if (strcmp(ctr, "RightAndLeft") == 0)
     {
-        AC_cool();
+        AC_leftright_on();
         Serial.println("左右扫风模式");
     }
     else if (strcmp(ctr, "Wind speed+") == 0)
     {
-        AC_cool();
+        AC_velocity();
         Serial.println("风速+");
     }
     else if (strcmp(ctr, "Mute") == 0)
     {
-        AC_cool();
+        AC_mute_on();
+        Serial.println("静音模式");
+    }
+    else if (strcmp(ctr, "Light") == 0)
+    {
+        AC_light();
         Serial.println("静音模式");
     }
 }
+
 void IrSend_cmd();
 void AC_on();
 void AC_off();
 void AC_cool();
 void AC_warm();
 void AC_wind();
-void AC_temp_up();
 void AC_dehumid();
 void AC_temp_up();
 void AC_temp_down();
