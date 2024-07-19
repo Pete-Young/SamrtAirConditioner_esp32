@@ -175,7 +175,7 @@ void IrSend_cmd()
     byte len = 8;
     byte data[] = {0x68,0x08,0x00,0xff,0x12,0x00,0x11,0x16};
     Ir_Serial.write(data, len);
-    delay(5000);
+    delay(500);
     printf("---sending complete!-----\n");
 
 }
@@ -205,10 +205,8 @@ void AC_on()
         free(cmdBuf); // 释放动态分配的内存
     }
     delay(500);
-
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(1000);
 }
 
 void AC_off()
@@ -230,10 +228,8 @@ void AC_off()
         free(cmdBuf); // 释放动态分配的内存
     }
     delay(500);
-
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 }
 
 void AC_cool()
@@ -258,7 +254,6 @@ void AC_cool()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -284,7 +279,6 @@ void AC_warm()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 }
 
 void AC_wind()
@@ -308,8 +302,6 @@ void AC_wind()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -335,7 +327,6 @@ void AC_dehumid()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -361,7 +352,6 @@ void AC_temp_up()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -386,8 +376,6 @@ void AC_temp_down()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -413,7 +401,6 @@ void AC_auxheat()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -439,7 +426,6 @@ void AC_updown_on()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -465,8 +451,6 @@ void AC_updown_off()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
-
 }
 
 void AC_leftright_on()
@@ -491,7 +475,6 @@ void AC_leftright_on()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -517,8 +500,6 @@ void AC_leftright_off()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
-
 }
 
 void AC_velocity()
@@ -542,8 +523,6 @@ void AC_velocity()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -568,8 +547,6 @@ void AC_mute_on()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -594,8 +571,6 @@ void AC_mute_off()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 
@@ -620,8 +595,6 @@ void AC_light()
     delay(500);
 
     IrSend_cmd();
-    // printf("---sending complete!-----\n");
-    delay(3000);
 
 }
 

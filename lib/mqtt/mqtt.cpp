@@ -26,15 +26,15 @@ const char *password = "20021113";                                              
 const char *mqttServer = "92e10cb0f7.st1.iotda-device.cn-north-4.myhuaweicloud.com"; // 在华为云IoT的 总览->接入信息->MQTT（1883）后面的网址
 const int mqttPort = 1883;
 // 以下3个参数可以由HMACSHA256算法生成，为硬件通过MQTT协议接入华为云IoT平台的鉴权依据
-const char *clientId = "6609494b71d845632a033b20_0331_0_0_2024033111";
-const char *mqttUser = "6609494b71d845632a033b20_0331";
-const char *mqttPassword = "8c03c225082feea540f65591dfbbad4cdeed779cca02ac072e3547098358fca7";
+const char *clientId = "6609494b71d845632a033b20_kongtiao_0_0_2024071915";
+const char *mqttUser = "6609494b71d845632a033b20_kongtiao";
+const char *mqttPassword = "c3e35fc861ebcd4272e80ac2c03760f72eb2683ab46274deff4821320a42ae35";
 
 // 华为云IoT的产品->查看->Topic管理->设备上报属性数据的 $oc/devices/{你的设备ID}/sys/properties/report
-const char *topic_properties_report = "$oc/devices/6609494b71d845632a033b20_0331/sys/properties/report";
+const char *topic_properties_report = "$oc/devices/6609494b71d845632a033b20_kongtiao/sys/properties/report";
 
 // 订阅命令下发主题
-const char *topic_commands_request = "$oc/devices/6609493b71d845632a033b20_0331/sys/commands/#";
+const char *topic_commands_request = "$oc/devices/6609494b71d845632a033b20_kongtiao/sys/commands/#";
 /*-----------------------------------------------------*/
 
 WiFiClient espClient; // ESP32WiFi模型定义MQTT_Init
@@ -372,28 +372,4 @@ void executeAirConditionerControlCommand(const JsonObject &paras)
         AC_mute_on();
         Serial.println("静音模式");
     }
-    else if (strcmp(ctr, "Light") == 0)
-    {
-        AC_light();
-        Serial.println("静音模式");
-    }
 }
-
-void IrSend_cmd();
-void AC_on();
-void AC_off();
-void AC_cool();
-void AC_warm();
-void AC_wind();
-void AC_dehumid();
-void AC_temp_up();
-void AC_temp_down();
-void AC_auxheat();
-void AC_updown_on();
-void AC_updown_off();
-void AC_leftright_on();
-void AC_leftright_off();
-void AC_velocity();
-void AC_mute_on();
-void AC_mute_off();
-void AC_light();

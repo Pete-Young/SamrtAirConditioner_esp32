@@ -11,7 +11,7 @@ void setup()
 {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  Ir_Serial.begin(115200, SERIAL_8N1, 16, 17);
+  Ir_Serial.begin(115200, SERIAL_8N1, 9, 10);
 
   initMQTTClient();
 }
