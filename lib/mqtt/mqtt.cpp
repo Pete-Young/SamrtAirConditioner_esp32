@@ -180,7 +180,7 @@ void subscribeToCommandTopic()
     }
 
     // 设置回调函数，当接收到命令请求时，会调用这个函数
-    //client.setCallback(mqttMessageCallback);
+    client.setCallback(mqttMessageCallback);
 }
 
 /**
@@ -238,213 +238,157 @@ bool publishResponse(const char *topic, const char *response)
  * @param topic 接收到消息的主题。
  * @param payload 接收到消息的有效载荷。
  * @param length 有效载荷的长度。
-//  */
-// void mqttMessageCallback(char *topic, byte *payload, unsigned int length)
-// {
-//     {
-
-//         Serial.println("-------------");
-//         printMessage("接收到华为云平台的命令下发消息: ", topic); // 打印主题中收到的消息
-
-//         char *request_id_start = strstr(topic, "request_id="); // 在主题中查找"request_id="
-//         printMessage("请求ID_start: ", request_id_start);      // 打印请求ID
-//         if (request_id_start == NULL)
-//         {                                          // 如果没有找到
-//             printMessage("请求ID未找到: ", topic); // 打印错误消息
-//             return;                                // 返回
-//         }
-
-//         const char *request_id = request_id_start + 11; // 获取request_id
-//         printMessage("请求ID: ", request_id);           // 打印请求ID
-
-//         printMessage("平台下发命令:", ""); // 打印平台下发的命令
-//         for (int i = 0; i < length; i++)
-//         {                                   // 遍历命令的每一个字符
-//             Serial.print((char)payload[i]); // 打印字符
-//         }
-//         Serial.println(); // 打印换行符
-
-//         // 将payload转换为字符串
-//         String payloadStr = String((char *)payload);
-
-//         // 创建一个JsonDocument对象，用于存储解析的JSON数据
-//         DynamicJsonDocument doc(200);
-
-//         // 解析JSON数据
-//         DeserializationError error = deserializeJson(doc, payloadStr);
-//         if (error)
-//         {
-//             Serial.print(F("deserializeJson() failed: "));
-//             Serial.println(error.f_str());
-//             return;
-//         }
-
-//         // 检查"command_name"字段是否为"led_ctr"
-//         const char *command_name = doc["command_name"];
-//         if (strcmp(command_name, "led_ctr") == 0)
-//         {
-//             JsonObject paras = doc["paras"].as<JsonObject>(); // 获取"paras"字段
-//             executeLedControlCommand(paras);                  // 执行led_ctr命令
-//         }
-//         else if (strcmp(command_name, "dht11_ctr") == 0)
-//         {
-//             JsonObject paras = doc["paras"].as<JsonObject>(); // 获取"paras"字段
-//             executeDht11ControlCommand(paras);                // 执行led_ctr命令
-//         }
-//         else if (strcmp(command_name, "air_conditioner") == 0)
-//         {
-//             JsonObject paras = doc["paras"].as<JsonObject>(); // 获取"paras"字段
-//             executeAirConditionerControlCommand(paras);       // 执行led_ctr命令
-//         }
-//         else if (strcmp(command_name, "SC" == 0))
-//         {
-//             JsonObject paras = doc["paras"].as<JsonObject>(); // 获取"paras"字段
-//             executeServoControlCommand(paras);
-//         }
-        
-
-//         printMessage("请求ID: ", request_id); // 打印请求ID
-
-//         // 创建响应消息
-//         doc["result_code"] = 0;
-//         doc["result_desc"] = "OK";
-//         char response[200];
-//         serializeJson(doc, response);
-
-//         char topic_commands_response[200]; // 定义一个数组，用于存储命令应答主题
-//         // 使用snprintf函数，将格式化的字符串写入topic_commands_response
-//         snprintf(topic_commands_response, sizeof(topic_commands_response), "$oc/devices/6609494b71d845632a033b20_0331/sys/commands/response/request_id=%s", request_id);
-//         publishResponse(topic_commands_response, response); // 发布响应
-//     }
-// }
-
-/**
- * Executes a LED control command based on the provided parameters.
- * 根据提供的参数执行 LED 控制命令。
- *
- * @param paras The JsonObject containing the command parameters.
- *              包含命令参数的 JsonObject 对象。
  */
-// void executeLedControlCommand(const JsonObject &paras)
-// {
-//     Led led(48);
-//     servo_setup(47);
+void mqttMessageCallback(char *topic, byte *payload, unsigned int length)
+{
+    {
 
-//     int value = paras["value"]; // 从"paras"字段中获取"value"字段，将其解析为一个整数
-//     if (value)
-//     {
-//         led.on();
-//         myservo.write(180); // 告诉舵机去到pos位置
-//     }
-//     else
-//     {
-//         led.off();
-//         myservo.write(10); // 0的话舵机内部会有问题
-//     }
-// }
+        Serial.println("-------------");
+        printMessage("接收到华为云平台的命令下发消息: ", topic); // 打印主题中收到的消息
 
-// void executeDht11ControlCommand(const JsonObject &paras)
-// {
-//     int value = paras["value"]; // 从"paras"字段中获取"value"字段，将其解析为一个整数
-//     if (value)
-//     {
-//         dht11_ctr = 1;
+        char *request_id_start = strstr(topic, "request_id="); // 在主题中查找"request_id="
+        printMessage("请求ID_start: ", request_id_start);      // 打印请求ID
+        if (request_id_start == NULL)
+        {                                          // 如果没有找到
+            printMessage("请求ID未找到: ", topic); // 打印错误消息
+            return;                                // 返回
+        }
 
-//         // 开始采集数据
-//         DHT dht(2, DHT11);
-//         dht.begin();
+        const char *request_id = request_id_start + 11; // 获取request_id
+        printMessage("请求ID: ", request_id);           // 打印请求ID
 
-//         const char *properties[] = {"temperature", "humidity"};
+        printMessage("平台下发命令:", ""); // 打印平台下发的命令
+        for (int i = 0; i < length; i++)
+        {                                   // 遍历命令的每一个字符
+            Serial.print((char)payload[i]); // 打印字符
+        }
+        Serial.println(); // 打印换行符
 
-//         // 当dht11_ctr为1时，持续采集数据并上报
-//         while (dht11_ctr)
-//         {
-//             int values[] = {dht.readHumidity(), dht.readTemperature()}; // 调用相应的函数来获取温度和湿度的值
-//             reportDeviceValues("esp32", properties, values, 2);
-//             delay(2000);
-//         }
-//     }
-//     else
-//     {
-//         // 停止采集数据
-//         dht11_ctr = 0;
-//     }
-// }
-// void executeDht11ControlCommand(const JsonObject &paras)
-// {
-//     int value = paras["value"]; // 从"paras"字段中获取"value"字段，将其解析为一个整数
-//     Led led(48);
-//     // 开始采集数据
-//     DHT dht(2, DHT11);
-//     dht.begin();
-//     const char *properties[] = {"temperature", "humidity"};
-//     if (value)
-//     {
+        // 将payload转换为字符串
+        String payloadStr = String((char *)payload);
 
-//         // 当dht11_ctr为1时，持续采集数据并上报
-//         int values[] = {dht.readHumidity(), dht.readTemperature()}; // 调用相应的函数来获取温度和湿度的值
-//         reportDeviceValues("esp32", properties, values, 2);
-//         led.on();
-//     }
-//     else
-//     {
-//         led.off();
-//     }
-// }
+        // 创建一个JsonDocument对象，用于存储解析的JSON数据
+        DynamicJsonDocument doc(200);
 
-// void executeAirConditionerControlCommand(const JsonObject &paras)
-// {
+        // 解析JSON数据
+        DeserializationError error = deserializeJson(doc, payloadStr);
+        if (error)
+        {
+            Serial.print(F("deserializeJson() failed: "));
+            // Serial.println(error.f_str());
+            return;
+        }
 
-//     const char *ctr = paras["ctr"];
-//     byte data[32], len;
+        // 检查"command_name"字段是否为"led_ctr"
+        const char *command_name = doc["command_name"];
+        if (strcmp(command_name, "air_conditioner") == 0)
+        {
+            JsonObject paras = doc["paras"].as<JsonObject>(); // 获取"paras"字段
+            executeAirConditionerControlCommand(paras);       // 执行led_ctr命令
+        }
 
-//     if (strcmp(ctr, "ON") == 0)
-//     {
-//         len = IrSend_data(data, 0);
-//         Serial1.write(data, len);
-//         Serial.println("空调已打开");
-//     }
-//     else if (strcmp(ctr, "OFF") == 0)
-//     {
-//         len = IrSend_data(data, 1);
-//         Serial1.write(data, len);
-//         Serial.println("空调已关闭");
-//     }
-//     else if (strcmp(ctr, "HOT") == 0)
-//     {
-//         len = IrSend_data(data, 2);
-//         Serial1.write(data, len);
-//         Serial.println("空调已设置为制热模式");
-//     }
-//     else if (strcmp(ctr, "COLD") == 0)
-//     {
-//         len = IrSend_data(data, 3);
-//         Serial1.write(data, len);
-//         Serial.println("空调已设置为制冷模式");
-//     }
-//     else if (strcmp(ctr, "RAISE") == 0)
-//     {
-//         len = IrSend_data(data, 4);
-//         Serial1.write(data, len);
-//         Serial.println("升高温度");
-//     }
-//     else if (strcmp(ctr, "REDUCE") == 0)
-//     {
-//         len = IrSend_data(data, 5);
-//         Serial1.write(data, len);
-//         Serial.println("降低温度");
-//     }
-// }
+        printMessage("请求ID: ", request_id); // 打印请求ID
 
+        // 创建响应消息
+        doc["result_code"] = 0;
+        doc["result_desc"] = "OK";
+        char response[200];
+        serializeJson(doc, response);
 
-void executeServoControlCommand(const JsonObject &paras)
+        char topic_commands_response[200]; // 定义一个数组，用于存储命令应答主题
+        // 使用snprintf函数，将格式化的字符串写入topic_commands_response
+        snprintf(topic_commands_response, sizeof(topic_commands_response), "$oc/devices/6609494b71d845632a033b20_0331/sys/commands/response/request_id=%s", request_id);
+        publishResponse(topic_commands_response, response); // 发布响应
+    }
+}
+
+void executeAirConditionerControlCommand(const JsonObject &paras)
 {
 
+    const char *ctr = paras["ctr"];
+    byte data[32], len;
 
-
-
-
-
-
-
+    if (strcmp(ctr, "ON") == 0)
+    {
+        AC_on();
+        Serial.println("空调已打开");
+    }
+    else if (strcmp(ctr, "OFF") == 0)
+    {
+        AC_off();
+        Serial.println("空调已关闭");
+    }
+    else if (strcmp(ctr, "HOT") == 0)
+    {
+        AC_warm();
+        Serial.println("空调已设置为制热模式");
+    }
+    else if (strcmp(ctr, "COLD") == 0)
+    {
+        AC_cool();
+        Serial.println("空调已设置为制冷模式");
+    }
+    else if (strcmp(ctr, "AirSupply") == 0)
+    {
+        AC_cool();
+        Serial.println("空调已设置为送风模式");
+    }
+    else if (strcmp(ctr, "Dehumidification") == 0)
+    {
+        AC_cool();
+        Serial.println("空调已设置为除湿模式");
+    }else if (strcmp(ctr, "Temperature+") == 0)
+    {
+        AC_cool();
+        Serial.println("升高温度");
+    }
+    else if (strcmp(ctr, "Temperature-") == 0)
+    {
+        AC_cool();
+        Serial.println("降低温度");
+    }
+    else if (strcmp(ctr, "AuxiliaryHeating") == 0)
+    {
+        AC_cool();
+        Serial.println("辅热模式");
+    }
+    else if (strcmp(ctr, "UpAndDown") == 0)
+    {
+        AC_cool();
+        Serial.println("上下扫风模式");
+    }
+    else if (strcmp(ctr, "RightAndLeft") == 0)
+    {
+        AC_cool();
+        Serial.println("左右扫风模式");
+    }
+    else if (strcmp(ctr, "Wind speed+") == 0)
+    {
+        AC_cool();
+        Serial.println("风速+");
+    }
+    else if (strcmp(ctr, "Mute") == 0)
+    {
+        AC_cool();
+        Serial.println("静音模式");
+    }
 }
+void IrSend_cmd();
+void AC_on();
+void AC_off();
+void AC_cool();
+void AC_warm();
+void AC_wind();
+void AC_temp_up();
+void AC_dehumid();
+void AC_temp_up();
+void AC_temp_down();
+void AC_auxheat();
+void AC_updown_on();
+void AC_updown_off();
+void AC_leftright_on();
+void AC_leftright_off();
+void AC_velocity();
+void AC_mute_on();
+void AC_mute_off();
+void AC_light();

@@ -40,24 +40,20 @@ void initMQTTClient();
 // 订阅命令主题
 void subscribeToCommandTopic();
 
+void mqttMessageCallback(char *topic, byte *payload, unsigned int length);
+
 // 当收到MQTT消息时的回调函数，参数包括主题、负载和负载长度
 // void mqttMessageCallback(char *topic, byte *payload, unsigned int length);
 
 // 发送MQTT消息，参数包括主题和消息内容
 void sendMQTTMessage(const char *topic, const char *message);
 
-// 执行LedCtr命令，参数是一个包含命令参数的Json对象
-void executeLedControlCommand(const JsonObject &paras);
 
-// 执行Dht11Ctr命令，参数是一个包含命令参数的Json对象
-void executeDht11ControlCommand(const JsonObject &paras);
 
 void executeAirConditionerControlCommand(const JsonObject &paras); // 执行led_ctr命令
 
 
 
-// 执行LedCtr命令，参数是一个包含命令参数的Json对象
-void executeServoControlCommand(const JsonObject &paras);
 
 
 // 上报设备的属性值，参数包括服务ID，属性名数组，属性值数组和数组大小

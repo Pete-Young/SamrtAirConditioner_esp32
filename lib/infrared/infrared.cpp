@@ -208,7 +208,7 @@ void AC_on()
 
     IrSend_cmd();
     // printf("---sending complete!-----\n");
-    delay(3000);
+    delay(1000);
 }
 
 void AC_off()
